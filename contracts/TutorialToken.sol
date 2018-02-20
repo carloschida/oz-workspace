@@ -28,14 +28,15 @@ contract TutorialToken is ERC827Token { // No longer (only) `StandardToken`
     function transfer(address _to, uint256 _value, bytes _data) public returns (bool) {
         require(_to != address(this));
         require(isAuthorized[_to]); // <- CRITICAL
-        super.transfer(_to, _value);
+        super.transfer(_to, _value, _data); // Change here
         require(_to.call(_data));
         return true;
     }
 
+    // Apparently the critical functionality needs to be stated also in this method.
     function transfer(address _to, uint256 _value) public returns (bool) {
         require(_to != address(this));
-        require(isAuthorized[_to]);
+        require(isAuthorized[_to]); // <- CRITICAL
         super.transfer(_to, _value);
         return true;
     }

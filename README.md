@@ -7,6 +7,8 @@ Files of interest:
 - `./UML/Tutorial Token inheritance.png`
 - `./UML/Tutorial Token inheritance (simple).png`
 
+**EDIT: Resolution discussed [here](https://github.com/OpenZeppelin/zeppelin-solidity/issues/762#issuecomment-367032888).**
+
 ## How to run
 
 Install [Ganache](http://truffleframework.com/ganache/) (v1.0.2) and leave it running with the default mnemonic.
@@ -33,15 +35,20 @@ Remember to open the application in `http://127.0.0.1:3000` with your Metamask-e
 Follow the instructions [here](http://truffleframework.com/tutorials/pet-shop#interacting-with-the-dapp-in-a-browser) to configure Metamask to use your local blockchain (Ganache's).
 
 
-**The following lines describe the issue as published in [OpenZeppelin/zeppelin-solidity](https://github.com/OpenZeppelin/zeppelin-solidity/issues).**
+**The following lines describe the issue as published in [OpenZeppelin/zeppelin-solidity Issue 762](https://github.com/OpenZeppelin/zeppelin-solidity/issues/762#issue-298639093).**
 
 ## 🎉 Description
 
 Assuming that the intention of the method `transfer(address _to, uint256 _value, bytes _data) public returns (bool)` of the `ERC827Token` interface is to handle ultimately the transfer of a token, and therefore its approval as well, I override it in my implementation but the behaviour does not math the expected result.
-My guess is that it has to do with the inheritance of the contract (see `Tutorial Token inheritance (simple).png` and `Tutorial Token inheritance.png`).
+My guess is that it has to do with the inheritance of the contract.
 
 - [X ] 🐛 This is a bug report.
 - [ ] 📈 This is a feature request.
+
+`Tutorial Token inheritance (simple).png`:
+![tutorial token inheritance simple](https://user-images.githubusercontent.com/979600/36432845-768d4830-165b-11e8-809b-4b967601bc44.png)
+
+See also `./UML/Tutorial Token inheritance.png`  of the repository [carloschida/oz-workspace](https://github.com/carloschida/oz-workspace) for the extended, annotated version with the method declarations in each contract.
 
 ## 💻 Environment
 
@@ -75,7 +82,7 @@ Transfers:
 ## 🔢 Code To Reproduce Issue [ Good To Have ]
 
 This code is what should be added/modified to the latest state of the [Robust Smart Contracts with OpenZeppelin](http://truffleframework.com/boxes/tutorialtoken).
-A **repository containing the full code** can be found here but I still leave the additions for them to be more easily readable.
+A **repository containing the full code** can be found [here](https://github.com/carloschida/oz-workspace) but I still leave the additions for them to be more easily readable.
 
 `TutorialToken.sol`:
 ```
@@ -128,4 +135,4 @@ function transfer(address _to, uint256 _value) public returns (bool) {
     return true;
 }
 ```
-This is why my guess is that someone the inheritance is wrong.
+This is why my guess is that something with inheritance is wrong.
