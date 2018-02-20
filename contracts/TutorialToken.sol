@@ -33,10 +33,4 @@ contract TutorialToken is ERC827Token { // No longer (only) `StandardToken`
         return true;
     }
 
-    function transfer(address _to, uint256 _value) public returns (bool) {
-        require(_to != address(this));
-        require(isAuthorized[_to]);
-        super.transfer(_to, _value);
-        return true;
-    }
 }
